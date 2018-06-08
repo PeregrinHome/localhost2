@@ -82,7 +82,7 @@ $(function () {
         }
     });
 });
-$('form.ajax').on('submit', function (event) {
+$('form.js-ajax').on('submit', function (event) {
     event.preventDefault();
 
     var formData = $(this).serialize(); // form data as string
@@ -93,12 +93,6 @@ $('form.ajax').on('submit', function (event) {
     } else {
         formMethod = $(this).attr('method'); // GET, POST
     }
-
-    $.ajaxSetup({
-        headers: {
-            'X-XSRF-Token': $('meta[name="_token"]').attr('content')
-        }
-    });
 
     $.ajax({
         type: formMethod,
@@ -121,7 +115,7 @@ $('form.ajax').on('submit', function (event) {
 
     return false; // prevent send form
 });
-$('.phone_you').mask('+0(000)000-00-00');
+$('.js-phone-you').mask('+0(000)000-00-00');
 
 /***/ }),
 /* 2 */

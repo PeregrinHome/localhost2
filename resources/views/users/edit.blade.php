@@ -9,81 +9,18 @@
                     <div class="card-header">{{ $user->f_name }}</div>
 
                     <div class="card-body">
-                        @include('modules._form',
-                        [
-                            'route' => ['users.update' , $user->id ],
-                            'class' => 'ajax',
-                            'fields' => [
-                                [
-                                    'type' => 'hidden',
-                                    'name' => '_method',
-                                    'value' => 'PATCH'
-                                ],
-                                [
-                                    'type' => 'text',
-                                    'label' => 'Имя',
-                                    'name' => 'f_name',
-                                    'class' => 'form-control'.($errors->has('f_name') ? ' is-invalid' : ''),
-                                    'value' => $user->f_name,
-                                    'required' => true,
-                                    'autofocus' => false
-                                ],
-                                [
-                                    'type' => 'text',
-                                    'label' => 'Фамилия',
-                                    'name' => 'l_name',
-                                    'class' => 'form-control'.($errors->has('l_name') ? ' is-invalid' : ''),
-                                    'value' => $user->l_name
-                                ],
-                                [
-                                    'type' => 'text',
-                                    'label' => 'Отчество',
-                                    'name' => 'm_name',
-                                    'class' => 'form-control'.($errors->has('m_name') ? ' is-invalid' : ''),
-                                    'value' => $user->m_name
-                                ],
-                                [
-                                    'type' => 'select',
-                                    'label' => 'Пол',
-                                    'placeholder' => null,
-                                    'name' => 'sex',
-                                    'value' => $user->sex,
-                                    'class' => 'form-control',
-                                    'required' => true,
-                                    'items' => ['male' => 'Мужчина', 'female' => 'Женщина']
-                                ],
-                                [
-                                    'type' => 'tel',
-                                    'label' => 'Телефон',
-                                    'name' => 'phone',
-                                    'class' => 'phone_you form-control'.($errors->has('phone') ? ' is-invalid' : ''),
-                                    'value' => $user->phone,
-                                    'required' => true,
-                                ]
-                            ],
-                            'btn' => [
-                                'label' => 'Сохранить',
-                                'class' => 'btn btn-primary'
-                            ]
-                        ])
+                        @include('users._form', ['user' => ($user ?? null)])
                     </div>
                     <div class="card-body">
-                            @include('modules._form',
-                            [
-                                'route' => ['users.destroy' , $user->id ],
-                                'class' => 'ajax',
-                                'fields' => [
-                                    [
-                                        'type' => 'hidden',
-                                        'name' => '_method',
-                                        'value' => 'DELETE'
-                                    ],
-                                ],
-                                'btn' => [
-                                    'label' => 'Удалить',
-                                    'class' => 'btn btn-primary'
-                                ]
-                            ])
+                        {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE', 'class' => 'js-ajax']) !!}
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Удалить
+                                    </button>
+                                </div>
+                            </div>
+                        {!! Form::close() !!}
                         </div>
                     </div>
 

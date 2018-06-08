@@ -43,7 +43,7 @@
                             <label for="tel" class="col-md-4 col-form-label text-md-right">Телефон</label>
 
                             <div class="col-md-6">
-                                <input id="tel" type="tel" class="phone_you form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+                                <input id="tel" type="tel" class="js-phone-you form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
 
                                 @if ($errors->has('phone'))
                                     <span class="invalid-feedback">

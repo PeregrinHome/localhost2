@@ -70,7 +70,7 @@ class UserController extends Controller
 
         $flashMessage = [
             'type' => 'success',
-            'text' => 'Профиль пользователя «' . $user->name . '» успешно создан.',
+            'text' => 'Профиль пользователя «' . $user->f_name . '» успешно создан.',
         ];
         if ($request->ajax())
         {
@@ -127,7 +127,7 @@ class UserController extends Controller
 
         $flashMessage = [
             'type' => 'success',
-            'text' => 'Профиль пользователя «' . $user->name . '» успешно обновлен',
+            'text' => 'Профиль пользователя «' . $user->f_name . '» успешно обновлен',
         ];
 
         if ($request->ajax())
