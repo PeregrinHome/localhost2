@@ -19,7 +19,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-@includeIf('modules._navbar')
+@includeIf('layouts.modules._navbar')
 
 @if(session('flash_message') && isset(session('flash_message')['type']) && isset(session('flash_message')['text']))
     <div class="container">
@@ -36,7 +36,7 @@
     @yield('content')
 </main>
 
-@includeIf('modules._footer')
+@includeIf('layouts.modules._footer')
 <!-- Scripts -->
 <script src="{{ asset('js/all.js') }}" defer></script>
 <script src="{{ asset('js/app.js') }}" defer></script>

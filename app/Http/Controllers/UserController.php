@@ -149,7 +149,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->users->destroy($user->id);
+        $this->users->destroy($user->getKey());
 
         $flashMessage = [
             'type' => 'success',

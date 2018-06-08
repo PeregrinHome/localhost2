@@ -1,16 +1,8 @@
-@if($user)
-    {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'PATCH', 'class' => 'js-ajax']) !!}
-@else
-    {!! Form::model(null, ['route' => ['users.store'], 'method' => 'POST']) !!}
-@endif
-
     @include('forms._input',[
     'name'=>'l_name',
     'class'=>'',
     'label'=>'Фамилия',
     ])
-
-
     @include('forms._input',[
     'name'=>'f_name',
     'class'=>'',
@@ -18,15 +10,11 @@
     'required'=>true,
     'text'=>'Обязательное поле',
     ])
-
-
     @include('forms._input',[
     'name'=>'m_name',
     'class'=>'',
     'label'=>'Отчество',
     ])
-
-
     @include('forms._select',[
     'name'=>'sex',
     'class'=>'form-control',
@@ -35,8 +23,6 @@
     'required' => true,
     'text' => 'Обязательное поле',
     ])
-
-
     @include('forms._input',[
     'name'=>'email',
     'class'=>'',
@@ -45,7 +31,6 @@
     'type'=>'email',
     'text'=>'Обязательное поле',
     ])
-
     @include('forms._input',[
     'name'=>'phone',
     'class'=>'js-phone-you',
@@ -54,7 +39,7 @@
     'required'=>true,
     'text'=>'Обязательное поле',
     ])
-@if(!$user)
+@if(!isset($user))
     @include('forms._input',[
     'name'=>'password',
     'class'=>'',
@@ -71,11 +56,3 @@
     'type'=>'password',
     ])
 @endif
-<div class="form-group row mb-0">
-    <div class="col-md-8 offset-md-4">
-        <button type="submit" class="btn btn-primary">
-            Сохранить
-        </button>
-    </div>
-</div>
-{!! Form::close() !!}

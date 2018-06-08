@@ -30,6 +30,52 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return mixed
+     */
+    public function getEmail(){
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone(){
+        return $this->phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSex(){
+        if($this->sex === 'male'){
+            return 'Мужчина';
+        }elseif($this->sex === 'female'){
+            return 'Женщина';
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName(){
+        return $this->f_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName(){
+        return $this->l_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMiddleName(){
+        return $this->m_name;
+    }
+
+    /**
      * @param Builder $query
      * @param array $frd
      * @return Builder
@@ -52,7 +98,7 @@ class User extends Authenticatable
                     break;
                 case 'search':
                     {
-                        $query->filterSearch($value);
+                        $query->search($value);
                     }
                     break;
                 default:
@@ -68,22 +114,17 @@ class User extends Authenticatable
 
         return $query;
     }
-    public function scopeFilterSearch(Builder $query, $searchData): Builder
+    public function scopeSearch(Builder $query, string $searchData): Builder
     {
-        $searchArray = explode(' ', $searchData);
+        $query->where(function ($query) use ($searchData) {
 
-        foreach ($searchArray as $searchData)
-        {
-            $query->where(function ($query) use ($searchData) {
+            $query->orWhere('f_name', 'like', '%' . $searchData . '%')
+                ->orWhere('l_name', 'like', '%' . $searchData . '%')
+                ->orWhere('m_name', 'like', '%' . $searchData . '%')
+                ->orWhere('phone', 'like', '%' . $searchData . '%')
+                ->orWhere('email', 'like', '%' . $searchData . '%');
 
-                $query->orWhere('f_name', 'like', '%' . $searchData . '%')
-                    ->orWhere('l_name', 'like', '%' . $searchData . '%')
-                    ->orWhere('m_name', 'like', '%' . $searchData . '%')
-                    ->orWhere('phone', 'like', '%' . $searchData . '%')
-                    ->orWhere('email', 'like', '%' . $searchData . '%');
-
-            });
-        }
+        });
 
         return $query;
     }
