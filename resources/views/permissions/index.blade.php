@@ -4,17 +4,16 @@
     <div class="container pt-3">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                {!! Form::open(['route'=>'users.index','method'=>'GET', 'class'=> 'form-inline']) !!}
+                {!! Form::open(['route'=>'permissions.index','method'=>'GET', 'class'=> 'form-inline']) !!}
                     {{ Form::search('search',$frd['search'] ?? old('search') ?? null,[
-                        'data-source'=>'/', //route('users.autocomplete')
-                        'aria-label'=>'Recipients username',
-                        'aria-describedby'=>'users__search',
+                        'data-source'=>'/', //route('permissions.autocomplete')
+                        'aria-label'=>'Recipients permissionname',
+                        'aria-describedby'=>'permissions__search',
                         'placeholder'=>"Поиск...",
                         'class'=>'form-control grow-1 js-autocomplete js-on-change-submit',
                     ]) }}
-                    {!! Form::select('sex', ['male' => 'Мужчина', 'female' => 'Женщина'], null, ['placeholder' => 'Пол', 'class' => 'ml-2 form-control']) !!}
                     <div class="btn-group mx-2" role="group">
-                        <a class="btn btn-outline-secondary " href="{{ route('users.index') }}"
+                        <a class="btn btn-outline-secondary " href="{{ route('permissions.index') }}"
                            title="Очистить форму">Очистить</a>
                     </div>
                     <button class="btn btn-primary" type="submit">Вперед!</button>
@@ -26,14 +25,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="list-group">
-                    @forelse ($users as $user)
-                        <a href="{{ route('users.show', $user) }}" class="list-group-item list-group-item-action">{{ $user->f_name }}</a>
+                    @forelse ($permissions as $permission)
+                        <a href="{{ route('permissions.show', $permission) }}" class="list-group-item list-group-item-action">{{ $permission->getDisplayName() }}</a>
                     @empty
-                        <p>No users</p>
+                        <p>No permissions</p>
                     @endforelse
                 </div>
             </div>
         </div>
     </div>
-    {{ $users->links() }}
+    {{ $permissions->links() }}
 @endsection

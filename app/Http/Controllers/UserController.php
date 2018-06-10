@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users\Role;
 use App\Models\Users\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,12 @@ use Illuminate\Database\Query\Builder;
 class UserController extends Controller
 {
     protected $users;
+    protected $roles;
 
-    public function __construct(User $users)
+    public function __construct(User $users, Role $roles)
     {
         $this->users  = $users;
+        $this->roles  = $roles;
         Route::model('user',User::class);
     }
 
@@ -27,7 +30,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
         $frd   = $request->all();
         $users = $this
             ->users
@@ -92,7 +94,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $roles = $user->roles()->get();
+        return view('users.show', compact('user', 'roles'));
     }
 
     /**
@@ -103,7 +106,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles = $this->roles->all();
+        $userRoles = $user->roles()->get();
+        return view('users.edit', compact('user', 'roles', 'userRoles'));
     }
 
     /**
@@ -122,7 +127,9 @@ class UserController extends Controller
             'l_name' => 'max:255',
             'm_name' => 'max:255',
         ]);
+        //TODO: Нет проверок на корректность поля roles
         $frd = $request->all();
+        $user->roles()->sync($request->input('roles'));
         $user->update($frd);
 
         $flashMessage = [

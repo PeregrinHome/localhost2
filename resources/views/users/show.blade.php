@@ -15,6 +15,13 @@
                         <p>{{ $user->phone }}</p>
                         <p>{{ $user->sex }}</p>
                         <br>
+                        <p class="h5">Роли</p>
+                        @forelse($roles as $role)
+                            <p class="text-success">{{ $role->getDisplayName() }}</p>
+                        @empty
+                            <p class="text-danger">Разрешений нет</p>
+                        @endforelse
+                        <br>
                         <a class="btn btn-primary" href="{{ route('users.edit', $user) }}">Редактировать</a>
                     </div>
 

@@ -56,3 +56,21 @@
     'type'=>'password',
     ])
 @endif
+
+@if(isset($roles))
+    <br>
+    <p class="h5">Присвоенные пользователю роли</p>
+    @forelse($roles as $role)
+        @include('forms._checkbox',[
+            'name' => 'roles[]',
+            'value' => $role->getKey(),
+            'label' => $role->getDisplayName(),
+            'checked' => $userRoles->contains($role)
+            ])
+    @empty
+        <p>Разрешений не создано.</p>
+    @endforelse
+    <br>
+    <br>
+    <br>
+@endif

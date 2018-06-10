@@ -4,17 +4,16 @@
     <div class="container pt-3">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                {!! Form::open(['route'=>'users.index','method'=>'GET', 'class'=> 'form-inline']) !!}
+                {!! Form::open(['route'=>'roles.index','method'=>'GET', 'class'=> 'form-inline']) !!}
                     {{ Form::search('search',$frd['search'] ?? old('search') ?? null,[
-                        'data-source'=>'/', //route('users.autocomplete')
-                        'aria-label'=>'Recipients username',
-                        'aria-describedby'=>'users__search',
+                        'data-source'=>'/', //route('roles.autocomplete')
+                        'aria-label'=>'Recipients rolename',
+                        'aria-describedby'=>'roles__search',
                         'placeholder'=>"Поиск...",
                         'class'=>'form-control grow-1 js-autocomplete js-on-change-submit',
                     ]) }}
-                    {!! Form::select('sex', ['male' => 'Мужчина', 'female' => 'Женщина'], null, ['placeholder' => 'Пол', 'class' => 'ml-2 form-control']) !!}
                     <div class="btn-group mx-2" role="group">
-                        <a class="btn btn-outline-secondary " href="{{ route('users.index') }}"
+                        <a class="btn btn-outline-secondary " href="{{ route('roles.index') }}"
                            title="Очистить форму">Очистить</a>
                     </div>
                     <button class="btn btn-primary" type="submit">Вперед!</button>
@@ -26,14 +25,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="list-group">
-                    @forelse ($users as $user)
-                        <a href="{{ route('users.show', $user) }}" class="list-group-item list-group-item-action">{{ $user->f_name }}</a>
+                    @forelse ($roles as $role)
+                        <a href="{{ route('roles.show', $role) }}" class="list-group-item list-group-item-action">{{ $role->getDisplayName() }}</a>
                     @empty
-                        <p>No users</p>
+                        <p>No roles</p>
                     @endforelse
                 </div>
             </div>
         </div>
     </div>
-    {{ $users->links() }}
+    {{ $roles->links() }}
 @endsection

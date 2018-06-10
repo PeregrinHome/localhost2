@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use Illuminate\Database\Eloquent\Builder;
 use Laratrust\Models\LaratrustPermission;
 
 class Permission extends LaratrustPermission
@@ -35,6 +36,15 @@ class Permission extends LaratrustPermission
     {
         return $this->description;
     }
+
+//    public function scopeGetAllPermissionToSelect(){
+//        $permissions = static::all(['id', 'display_name']);
+//        $permissionsForSelect = [];
+//        foreach ($permissions as $permission){
+//            $permissionsForSelect[$permission->getKey()] = $permission->getDisplayName();
+//        }
+//        return $permissionsForSelect;
+//    }
 
     /**
      * @param Builder $query
